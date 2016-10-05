@@ -11,3 +11,4 @@ activity_totalsteps <- aggregate(steps ~ date, data = activity, sum)
 activity_meansteps <- aggregate(steps ~ date, data = activity, mean)
 #median steps per day
 activity_mediansteps <- aggregate(steps ~ date, data = activity, median)
+test
