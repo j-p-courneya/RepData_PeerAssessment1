@@ -1,13 +1,9 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 ## Loading and preprocessing the data
-```{r}
+
+```r
 activity <- read.csv("~/Desktop/Coursera/ReproducibleResearch/RepData_PeerAssessment1/activity.csv",
                      stringsAsFactors=FALSE)
 ```
@@ -19,15 +15,24 @@ activity <- read.csv("~/Desktop/Coursera/ReproducibleResearch/RepData_PeerAssess
 1. Make a histogram of the total number of steps taken each day
 
 2. Calculate and report the **mean** and **median** total number of steps taken per day
-```{r}
+
+```r
 activity_totalsteps <- aggregate(steps ~ date, data = activity, sum)
 mean(activity_totalsteps$steps)
 ```
-```{r}
+
+```
+## [1] 10766.19
+```
+
+```r
 median(activity_totalsteps$steps)
 ```
-## What is the average daily activity pattern?
 
+```
+## [1] 10765
+```
+## What is the average daily activity pattern?
 
 steps_interval <- aggregate(steps ~ interval, data = activity, mean)
 
