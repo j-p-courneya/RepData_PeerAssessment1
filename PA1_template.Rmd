@@ -7,29 +7,60 @@ output:
 
 
 ## Loading and preprocessing the data
+1. Load the data
 ```{r}
 activity <- read.csv("~/Desktop/Coursera/ReproducibleResearch/RepData_PeerAssessment1/activity.csv",
                      stringsAsFactors=FALSE)
 ```
 
 ## What is mean total number of steps taken per day?
+1. Calculate the total number of steps taken per day
 
-### What is mean total number of steps taken per day?
-
-1. Make a histogram of the total number of steps taken each day
-
-2. Calculate and report the **mean** and **median** total number of steps taken per day
 ```{r}
 activity_totalsteps <- aggregate(steps ~ date, data = activity, sum)
-mean(activity_totalsteps$steps)
 ```
+
+2. Make a histogram of the total number of steps taken each day
+
+```{r fig.width=10, fig.height=8, fig.align='center', fig.cap="Histogram of The Total Number of Steps Taken Each Day"}
+    xname <- "Steps Taken Each Day"
+    yname <- "Frequency"
+    hist(activity_totalsteps$steps,  
+         main   = paste("Histogram Of The Total Number Of", xname), 
+         xlab   = xname, 
+         ylab   = yname, 
+         col    = "lightblue", 
+         labels = FALSE,
+         axes   = "TRUE",
+         plot   = "TRUE",
+         border = "gray")
+```
+
+3. Calculate and report the **mean** and **median** total number of steps taken per day
+
 ```{r}
+mean(activity_totalsteps$steps)
 median(activity_totalsteps$steps)
 ```
+With no NA removed the mean steps per day is `r mean(activity_totalsteps$steps)` and the median steps per day `r median(activity_totalsteps$steps)`
+
 ## What is the average daily activity pattern?
+1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
-
+```{r}
 steps_interval <- aggregate(steps ~ interval, data = activity, mean)
+plot(steps_interval$interval,
+     steps_interval$steps, 
+     type="l",
+     xlab="Interval",
+     ylab="Number of Steps",
+     main="The Average Daily Activity Pattern")
+```
+2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+```{r}
+maxSteps<-steps_interval$interval[which.max(steps_interval$steps)]
+```
+The interval that contains the maximum number of steps is `r maxSteps`.
 
 
 ## Imputing missing values
